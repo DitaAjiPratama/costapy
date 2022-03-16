@@ -31,27 +31,27 @@ You can use nohup too and running it in the background like this
 
 ### Server (config/server.py)
 
-tools.sessions.on
-Default: True
-Description: Enable sessions
+tools.sessions.on </br>
+Default: True </br>
+Description: Enable sessions </br>
 
-engine.autoreload.on
-Default: False
-Description: Auto Reload when source code change. Don't use it in production.
+engine.autoreload.on </br>
+Default: False </br>
+Description: Auto Reload when source code change. Don't use it in production. </br>
 
-request.show_tracebacks
-Default: False
-Description: Show traceback for debugging in development purposes.
+request.show_tracebacks </br>
+Default: False </br>
+Description: Show traceback for debugging in development purposes. </br>
 
 ### Global Variable (config/globalvar.py)
 
 `directory.py` is the place for storing your Global Variable.
 
-GV_base_url
-Is the variable for your base URL (without `/` in the end)
+GV_base_url </br>
+Is the variable for your base URL (without `/` in the end).
 
-GV_title
-Is the variable for your web title
+GV_title </br>
+Is the variable for your web title.
 
 ### Directory (config/directory.py)
 
