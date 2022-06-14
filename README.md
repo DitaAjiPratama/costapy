@@ -32,6 +32,14 @@ You can install it with run this command
 
     sh install.sh
 
+Here is the completed command
+
+    pip install --upgrade pip
+    pip install cherrypy
+    pip install mako
+    pip install mysql-connector
+    pip install bcrypt
+
 ## Usage
 
 Use this command to start the web service
