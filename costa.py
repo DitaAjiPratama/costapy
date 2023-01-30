@@ -1,5 +1,6 @@
 import sys
 import cherrypy
+import cherrypy_cors
 import handler
 
 from config import server
@@ -15,6 +16,7 @@ if __name__ == '__main__':
         update["server.socket_host"]    = sys.argv[1]
         update["server.socket_port"]    = int(sys.argv[2])
 
+        cherrypy_cors.install()
         cherrypy.config.update  ( update                                )
         cherrypy.quickstart     ( handler.handler(), config = dirconfig )
 

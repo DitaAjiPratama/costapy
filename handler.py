@@ -1,4 +1,5 @@
 import cherrypy
+import cherrypy_cors
 import json
 
 import core.authentication      as authentication
@@ -8,6 +9,7 @@ import config.template          as pages
 
 import modules.user.home        as user_home
 
+@cherrypy.tools.accept(media="application/json")
 class handler(pages.main):
 
     def __init__(self):
