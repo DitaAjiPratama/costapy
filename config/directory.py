@@ -3,6 +3,7 @@ import os
 # For templating
 page        = "static/page"
 template    = "static/template"
+email       = "static/email"
 
 # For route
 dirconfig = {

@@ -7,6 +7,7 @@ class main:
         # Declare a variables
         self.html_page      = html.main.get_html(directory.page)
         self.html_template  = html.main.get_html(directory.template)
+        self.html_email     = html.main.get_html(directory.email)
 
     def user(self, page):
         params_list = {
@@ -14,5 +15,11 @@ class main:
             "topnav"    : self.html_template    ["topnav.html"      ]   ,
             "footer"    : self.html_template    ["footer.html"      ]   ,
             "container" : self.html_page        [ page+".html"      ]
+        }
+        return params_list
+
+    def verification(self):
+        params_list = {
+            "template"  : self.html_email       ["verification.html"    ]
         }
         return params_list
