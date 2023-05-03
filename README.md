@@ -24,9 +24,11 @@ along with this program.  If not, see https://www.gnu.org/licenses/.
 
 You need this libraries to use CostaPy:
 - cherrypy
+- cherrypy-cors
 - mako
 - mysql-connector
 - bcrypt
+- pyjwt[crypto]
 
 You can install it with run this command
 
@@ -34,11 +36,14 @@ You can install it with run this command
 
 Here is the completed command
 
+    sudo apt-get install -y python3-pip
     pip install --upgrade pip
     pip install cherrypy
+    pip install cherrypy-cors
     pip install mako
     pip install mysql-connector
     pip install bcrypt
+    pip install pyjwt[crypto]
 
 ## Usage
 
