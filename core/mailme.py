@@ -19,5 +19,5 @@ def smtp(config):
     smtp_server.ehlo()
     smtp_server.starttls()
     smtp_server.login( config['login']['email'], config['login']['password'] )
-    smtp_server.sendmail('&&&&&&', email, msg.as_string() )
+    smtp_server.sendmail('&&&&&&', config['to'], msg.as_string() )
     smtp_server.quit()
