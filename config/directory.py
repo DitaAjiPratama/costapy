@@ -1,5 +1,9 @@
 import os
 
+# For a static error pages
+def erpadir(err):
+    return f'static/error/{err}.html'
+
 # For templating
 page        = "static/page"
 template    = "static/template"

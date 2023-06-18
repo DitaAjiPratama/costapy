@@ -1,5 +1,4 @@
-def erpadir(err):
-    return f'static/error/{err}.html'
+from config import directory
 
 update = {
     'server.socket_host'                : "hostname"    ,
@@ -8,7 +7,7 @@ update = {
     'tools.sessions.on'                 : True          ,
     'engine.autoreload.on'              : False         ,
     'request.show_tracebacks'           : False         ,
-    'error_page.403'                    : erpadir(403)  ,
-    'error_page.404'                    : erpadir(404)  ,
-    'error_page.500'                    : erpadir(500)  ,
+    'error_page.403'                    : directory.erpadir(403)  ,
+    'error_page.404'                    : directory.erpadir(404)  ,
+    'error_page.500'                    : directory.erpadir(500)  ,
 }
