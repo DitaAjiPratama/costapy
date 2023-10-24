@@ -20,11 +20,17 @@ class main:
 
 		name				= "World"
 
+		user_roles			= ["guest"]
+		active_page			= "Home"
+
 		return Template(interface_template).render(
 			GV_title	= globalvar.GV_title,
 			GV_base_url	= globalvar.GV_base_url,
 			topnav		= Template(topnav).render(
 				GV_title	= globalvar.GV_title,
+            	menu		= globalvar.GV_menu_navbar,
+                user_roles	= user_roles,
+                active_page	= active_page
 			),
 			footer		= Template(footer).render(
 				copyright_holder	= "Dita Aji Pratama",
