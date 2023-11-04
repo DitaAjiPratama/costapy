@@ -1,5 +1,3 @@
-import	cherrypy
-
 from    mako.template       import  Template
 import  mysql.connector     as      mariadb
 
@@ -13,10 +11,10 @@ class main:
 
 	def html(self, params):
 
-		interface_template	= params["params_page"]['template'	]
-		topnav				= params["params_page"]['topnav'	]
-		footer				= params["params_page"]['footer'	]
-		container			= params["params_page"]['container'	]
+		interface_template	= params["mako_website"]['template'		]
+		topnav				= params["mako_website"]['topnav'		]
+		footer				= params["mako_website"]['footer'		]
+		container			= params["mako_website"]['container'	]
 
 		name				= "World"
 
@@ -28,12 +26,12 @@ class main:
 			GV_base_url	= globalvar.GV_base_url,
 			topnav		= Template(topnav).render(
 				GV_title	= globalvar.GV_title,
-            	menu		= globalvar.GV_menu_navbar,
+            	menu		= globalvar.GV_menu['public']['topnav'],
                 user_roles	= user_roles,
                 active_page	= active_page
 			),
 			footer		= Template(footer).render(
-				copyright_holder	= "Dita Aji Pratama",
+				copyright_holder	= globalvar.GV_copyright,
 			),
             container	= Template(container).render(
 				GV_base_url		= globalvar.GV_base_url,

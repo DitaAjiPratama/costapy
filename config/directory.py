@@ -1,14 +1,9 @@
 import os
 
-# For a static error pages
-def erpadir(err):
-    return f'static/error/{err}.html'
-
-# For templating
-page        = "static/page"
-template    = "static/template"
-email       = "static/email"
-
+page = {
+    'public'    :'page/public'  ,
+    'error'     :'page/error' # Non-template
+}
 # For route
 dirconfig = {
     '/' :

@@ -1,21 +1,13 @@
 import cherrypy
-import cherrypy_cors
 import json
-
-import core.authentication      as authentication
-
-import config.globalvar         as globalvar
-import config.template          as pages
-
-import modules.user.home        as user_home
+import config.directory                 as directory
+import templates.basic_bootstrap.main   as basic_bootstrap
+import modules.public.home              as public_home
 
 @cherrypy.tools.accept(media="application/json")
-class handler(pages.main):
-
-    def __init__(self):
-        pages.main.__init__(self)
+class handler():
 
     def index(self, **kwargs):
-        kwargs["params_page"] = pages.main().user("home")
-        return user_home.main().html(kwargs)
+        kwargs["mako_website"] = basic_bootstrap.main(directory.page["public"], "home")
+        return public_home.main().html(kwargs)
     index.exposed = True
