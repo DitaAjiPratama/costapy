@@ -4,7 +4,7 @@ page = {
     'public'    :'page/public'  ,
     'error'     :'page/error' # Non-template
 }
-# For route
+
 dirconfig = {
     '/' :
     {

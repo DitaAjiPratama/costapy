@@ -1,5 +1,3 @@
-# Your database list
-
 main_db = {
     'host'          : 'localhost',
     'user'          : 'root',
