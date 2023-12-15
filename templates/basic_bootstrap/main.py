@@ -1,4 +1,22 @@
-from core import html
+from core   import html
+from config import directory
+
+static = [
+    {
+        'name':'/basic_bootstrap/lib',
+        'value':{
+            'tools.staticdir.on'    : True ,
+            'tools.staticdir.dir'   : './templates/basic_bootstrap/static/lib' ,
+        }
+    },
+    {
+        'name':'/basic_bootstrap/css',
+        'value':{
+            'tools.staticdir.on'    : True ,
+            'tools.staticdir.dir'   : './templates/basic_bootstrap/static/css' ,
+        }
+    }
+]
 
 def main(dir, page):
 
