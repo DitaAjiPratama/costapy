@@ -3,35 +3,25 @@ import	config.globalvar	as globalvar
 
 class main:
 
-	def __init__(self):
- 		pass
+    def __init__(self):
+        pass
 
-	def html(self, params):
-
-		interface_template	= params["mako_website"]['template'		]
-		topnav				= params["mako_website"]['topnav'		]
-		footer				= params["mako_website"]['footer'		]
-		container			= params["mako_website"]['container'	]
-
-		name				= "World"
-
-		user_roles			= ["guest"]
-		active_page			= "Home"
-
-		return Template(interface_template).render(
-			GV_title	= globalvar.GV_title,
-			GV_base_url	= globalvar.GV_base_url,
-			topnav		= Template(topnav).render(
-				GV_title	= globalvar.GV_title,
-            	menu		= globalvar.GV_menu['public']['topnav'],
-                user_roles	= user_roles,
-                active_page	= active_page
-			),
-			footer		= Template(footer).render(
-				copyright_holder	= globalvar.GV_copyright,
-			),
-            container	= Template(container).render(
-				GV_base_url		= globalvar.GV_base_url,
-				greeting		= "Hello " + name + ", " + "Welcome to " + globalvar.GV_title
-			)
+    def html(self, params):
+        return Template(params["mako"]["website"]['template']).render(
+            title	= globalvar.title,
+            baseurl	= globalvar.baseurl,
+            topnav	= Template(params["mako"]["website"]['topnav']).render(
+                title		= globalvar.title,
+                baseurl		= globalvar.baseurl,
+                menu		= globalvar.menu['public']['topnav'],
+                user_roles	= ["guest"],
+                active_page	= "Home"
+            ),
+            footer	= Template(params["mako"]["website"]['footer']).render(
+                copyright	= "Dita Aji Pratama",
+            ),
+            container	= Template(params["mako"]["website"]['container']).render(
+                baseurl		= globalvar.baseurl,
+                greeting	= f"Hello world, welcome to {globalvar.title}"
+            )
         )

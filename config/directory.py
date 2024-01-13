@@ -1,7 +1,5 @@
 import os
-
-# template import
-import templates.basic_bootstrap.main   as basic_bootstrap
+from core import templatestaticdir
 
 # pages directory
 page = {
@@ -21,11 +19,12 @@ dirconfig = {
         'tools.staticdir.on'    : True ,
         'tools.staticdir.dir'   : './static/css' ,
     },
+    '/js' :
+    {
+        'tools.staticdir.on'    : True ,
+        'tools.staticdir.dir'   : './static/js' ,
+    },
 }
 
-def add(template):
-    for row in template:
-        dirconfig[ row['name'] ] = row['value']
-
-# template staticdir
-add(basic_bootstrap.static)
+# template staticdir: dirconfig  dirtemplate
+templatestaticdir.add(dirconfig, "templates")

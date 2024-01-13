@@ -10,6 +10,8 @@ import modules.public.home	as public_home
 class handler():
 
     def index(self, **kwargs):
-        kwargs["mako_website"] = basic_bootstrap.main(directory.page["public"], "home")
+        kwargs["mako"] = {
+            "website" : bare.main(directory.page["public"], "home")
+        }
         return public_home.main().html(kwargs)
     index.exposed = True

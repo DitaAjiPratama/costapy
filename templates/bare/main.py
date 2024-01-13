@@ -1,26 +1,25 @@
 from core   import html
-from config import directory
 
 static = [
     {
-        'name':'/basic_bootstrap/lib',
+        'name':'/bare/lib',
         'value':{
             'tools.staticdir.on'    : True ,
-            'tools.staticdir.dir'   : './templates/basic_bootstrap/static/lib' ,
+            'tools.staticdir.dir'   : './templates/bare/static/lib' ,
         }
     },
     {
-        'name':'/basic_bootstrap/css',
+        'name':'/bare/css',
         'value':{
             'tools.staticdir.on'    : True ,
-            'tools.staticdir.dir'   : './templates/basic_bootstrap/static/css' ,
+            'tools.staticdir.dir'   : './templates/bare/static/css' ,
         }
     }
 ]
 
 def main(dir, page):
 
-    html_template   = html.main.get_html("templates/basic_bootstrap/html")
+    html_template   = html.main.get_html("templates/bare/html")
     html_page       = html.main.get_html(dir)
     params_list = {
         "template"  : html_template ["template.html"    ]   ,

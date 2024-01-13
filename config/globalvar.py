@@ -1,8 +1,7 @@
-GV_base_url = "http://localhost:81"
-GV_title    = "CostaPy"
-GV_copyright    = "Dita Aji Pratama"
+baseurl = "http://localhost:81"
+title    = "CostaPy"
 
-GV_menu = {
+menu = {
     "public": {
         "topnav": [
             {
