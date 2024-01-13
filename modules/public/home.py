@@ -1,8 +1,5 @@
-from    mako.template       import  Template
-import  mysql.connector     as      mariadb
-
-import  config.database		as 		database
-import	config.globalvar	as 		globalvar
+from    mako.template		import Template
+import	config.globalvar	as globalvar
 
 class main:
 

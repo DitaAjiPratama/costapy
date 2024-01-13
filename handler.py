@@ -1,10 +1,10 @@
 import cherrypy
 import json
-import config.directory                 as directory
+import config.directory		as directory
 
-import templates.basic_bootstrap.main   as basic_bootstrap
+import templates.bare.main	as bare
 
-import modules.public.home              as public_home
+import modules.public.home	as public_home
 
 @cherrypy.tools.accept(media="application/json")
 class handler():
