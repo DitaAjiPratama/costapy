@@ -1,4 +1,4 @@
-main_db = {
+db_main = {
     'host'       : 'localhost',
     'user'       : 'root',
     'password'   : '',

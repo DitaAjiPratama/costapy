@@ -1,5 +1,5 @@
-from    mako.template		import Template
-import	config.globalvar	as globalvar
+from    mako.template      import Template
+from    config             import globalvar
 
 class main:
 

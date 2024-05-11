@@ -1,4 +1,4 @@
-baseurl = "http://localhost:81"
+baseurl = "http://127.0.0.1:15001"
 title    = "CostaPy"
 
 menu = {
@@ -10,13 +10,13 @@ menu = {
                 "roles":["guest"]
             },
             {
-                "name":"About",
+                "name":"Profile",
                 "href":"#",
                 "roles":["guest"]
             },
             {
                 "name":"CostaPy Website",
-                "href":"https://costapy.ditaajipratama.com",
+                "href":"https://costapy.ditaajipratama.net",
                 "roles":["guest"]
             }
         ]

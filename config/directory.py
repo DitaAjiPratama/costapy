@@ -1,30 +1,13 @@
-import os
-from core import templatestaticdir
+from core import template
 
-# pages directory
 page = {
-    'public'    :'page/public'  ,
-    'error'     :'page/error' # Non-template
+    'public'    :'pages/public'
 }
 
-# public staticdir
-dirconfig = {
-    '/' :
+static = [
     {
-        'tools.sessions.on'     : True ,
-        'tools.staticdir.root'  : os.path.abspath(os.getcwd()) ,
-    },
-    '/css' :
-    {
-        'tools.staticdir.on'    : True ,
-        'tools.staticdir.dir'   : './static/css' ,
-    },
-    '/js' :
-    {
-        'tools.staticdir.on'    : True ,
-        'tools.staticdir.dir'   : './static/js' ,
-    },
-}
-
-# template staticdir: dirconfig  dirtemplate
-templatestaticdir.add(dirconfig, "templates")
+        "route" :"/css/<filepath:re:.*\.(css|sass|css.map)>",
+        "root"  :"./static/css"
+    }
+]
+template.add(static, "templates")
