@@ -5,20 +5,19 @@
 # This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 
-import cherrypy
-import json
-import config.directory		as directory
+from    bottle                  import Bottle, route
+from    config                  import directory
 
-import templates.bare.main	as bare
+import  templates.plain.main	as template_public
+import  modules.public.home     as public_home
 
-import modules.public.home	as public_home
+app = Bottle()
 
-@cherrypy.tools.accept(media="application/json")
-class handler():
-
-    def index(self, **kwargs):
-        kwargs["mako"] = {
-            "website" : bare.main(directory.page["public"], "home")
+@app.route('/')
+def index():
+    params = {
+        "mako":{
+            "website" : template_public.main(directory.page["public"], "home")
         }
-        return public_home.main().html(kwargs)
-    index.exposed = True
+    }
+    return public_home.main().html(params)

@@ -5,28 +5,23 @@
 # This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 
-import sys
-import cherrypy
-import cherrypy_cors
-import handler
+import  sys
+from    bottle      import Bottle, run
 
-from config import server
-from config import directory
+import  handler
 
-if __name__ == '__main__':
+from    core        import staticdir
+from    config      import server
 
-    dirconfig   = directory.dirconfig
-    update      = server.update
+app = Bottle()
 
-    if len(sys.argv) >= 3:
+app.merge(handler.app)
+app.merge(staticdir.app)
 
-        update["server.socket_host"]    = sys.argv[1]
-        update["server.socket_port"]    = int(sys.argv[2])
-
-        cherrypy_cors.install()
-        cherrypy.config.update  ( update                                )
-        cherrypy.quickstart     ( handler.handler(), config = dirconfig )
-
-    else:
-        print ("Usage   : python<ver>   costa.py    <ip_address>    <port>  <service_name>")
-        print ("Example : python3       costa.py    localhost       81      CostaPySample")
+run(app,
+    host = server.host,
+    port = server.port,
+    reloader = server.reloader,
+    server = server.server,
+    debug = server.debug
+)

@@ -1,0 +1,3 @@
+[submodule "templates/plain"]
+	path = templates/plain
+	url = https://gitea.ditaajipratama.net/aji/costapy-template-plain.git

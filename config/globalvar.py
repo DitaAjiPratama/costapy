@@ -1,24 +1,28 @@
-baseurl = "http://localhost:81"
-title    = "CostaPy"
+title	= "CostaPy"
 
-menu = {
+menu	= {
     "public": {
-        "topnav": [
+        "navbar": [
             {
                 "name":"Home",
+                "target":"_self",
                 "href":"/",
                 "roles":["guest"]
             },
             {
                 "name":"About",
-                "href":"#",
+                "target":"_self",
+                "href":"/about",
                 "roles":["guest"]
             },
             {
-                "name":"CostaPy Website",
-                "href":"https://costapy.ditaajipratama.com",
+                "name":"Docs",
+                "target":"_blank",
+                "href":"https://costapy.ditaajipratama.net",
                 "roles":["guest"]
             }
         ]
     }
 }
+
+copyright	= "Copyright (C) 2022  Dita Aji Pratama"

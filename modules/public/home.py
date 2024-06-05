@@ -1,5 +1,5 @@
-from    mako.template		import Template
-import	config.globalvar	as globalvar
+from    mako.template      import Template
+from    config             import globalvar
 
 class main:
 
@@ -7,21 +7,18 @@ class main:
         pass
 
     def html(self, params):
-        return Template(params["mako"]["website"]['template']).render(
+        return Template(params["mako"]["website"]['index']).render(
             title	= globalvar.title,
-            baseurl	= globalvar.baseurl,
-            topnav	= Template(params["mako"]["website"]['topnav']).render(
-                title		= globalvar.title,
-                baseurl		= globalvar.baseurl,
-                menu		= globalvar.menu['public']['topnav'],
+            header	= "Welcome to CostaPy",
+            navbar	= Template(params["mako"]["website"]['navbar']).render(
+                menu		= globalvar.menu['public']['navbar'],
                 user_roles	= ["guest"],
                 active_page	= "Home"
             ),
             footer	= Template(params["mako"]["website"]['footer']).render(
-                copyright	= "Dita Aji Pratama",
+                copyright	= globalvar.copyright,
             ),
             container	= Template(params["mako"]["website"]['container']).render(
-                baseurl		= globalvar.baseurl,
-                greeting	= f"Hello world, welcome to {globalvar.title}"
+                greeting	= f"Welcome to your new web application! This placeholder page is here to let you know that your web framework is successfully set up and ready to go. Now, it's time to start building your project. Dive into the documentation to explore the features and capabilities at your disposal."
             )
         )

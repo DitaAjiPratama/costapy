@@ -1,20 +1,16 @@
-from config import directory
+host        = "localhost"
+port        = 15001
+reloader    = False
+debug       = False
+server      = 'gunicorn' # default = 'wsgiref'
 
-update = {
-    'server.socket_host'                : "hostname"    ,
-    'server.socket_port'                : "port"        ,
+# cors
+# session
 
-    'cors.expose.on'                    : True          ,
-    'tools.sessions.on'                 : True          ,
+# error page 403
+# error page 404
+# error page 500
 
-    'engine.autoreload.on'              : False         ,
-    'request.show_tracebacks'           : False         ,
-
-    'error_page.403'                    : f'{directory.page["error"]}/403.html' ,
-    'error_page.404'                    : f'{directory.page["error"]}/404.html' ,
-    'error_page.500'                    : f'{directory.page["error"]}/500.html' ,
-
-    'server.max_request_body_size'      : 800 * 1024 * 1024 , # 800MB; Default 100MB
-    'server.socket_timeout'             : 60                , # Default 10s
-    'response.timeout'                  : 3600              , # Default 300s
-}
+# max_request_body_size   = 800 * 1024 * 1024 ,   # Multiply for 800MB result
+# socket timeout = 60
+# response timeout = 3600
