@@ -25,6 +25,7 @@ along with this program.  If not, see https://www.gnu.org/licenses/.
 You need this libraries to use CostaPy:
 - bottle
 - gunicorn
+- beaker
 - mako
 
 You can install it with run this command
@@ -37,6 +38,7 @@ Here is the completed command
     pip install --upgrade pip
     pip install bottle
     pip install gunicorn
+    pip install beaker
     pip install mako
 
 ## Usage
