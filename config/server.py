@@ -4,8 +4,14 @@ reloader    = False
 debug       = False
 server      = 'gunicorn' # default = 'wsgiref'
 
+session_opts = {
+    'session.type': 'file',
+    'session.cookie_expires': 5*60, # Session expiration in seconds: minutes*seconds
+    'session.data_dir': './beaker/data',
+    'session.auto': True
+}
+
 # cors
-# session
 
 # error page 403
 # error page 404
