@@ -7,7 +7,7 @@ server      = 'gunicorn' # default = 'wsgiref'
 session_opts = {
     'session.type': 'file',
     'session.cookie_expires': 5*60, # Session expiration in seconds: minutes*seconds
-    'session.data_dir': './beaker/data',
+    'session.data_dir': './.beaker/data',
     'session.auto': True
 }
 
