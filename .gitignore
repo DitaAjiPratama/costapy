@@ -4,3 +4,4 @@ venv/
 env/
 .beaker/data/*
 !.beaker/data/.noremove
+nohup.out
