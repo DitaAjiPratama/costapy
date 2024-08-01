@@ -1,1 +1,7 @@
 **/__pycache__
+*.pyc
+venv/
+env/
+.beaker/data/*
+!.beaker/data/.noremove
+nohup.out

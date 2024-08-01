@@ -22,9 +22,26 @@ along with this program.  If not, see https://www.gnu.org/licenses/.
 
 ## Requirement & Installation
 
+### Clone the repository
+
+Clone the repository with `--recursive` when cloning the repo.
+
+    git clone https://gitea.ditaajipratama.net/aji/costapy.git --recursive
+
+Note that if you forgot the `--recursive` flag you can do:
+
+    git submodule update --init
+
+Note that when submodules have other submodules you need recursive option.
+
+    git submodule update --init --recursive
+
+### Dependencies
+
 You need this libraries to use CostaPy:
 - bottle
 - gunicorn
+- beaker
 - mako
 
 You can install it with run this command
@@ -37,6 +54,7 @@ Here is the completed command
     pip install --upgrade pip
     pip install bottle
     pip install gunicorn
+    pip install beaker
     pip install mako
 
 ## Usage

@@ -6,7 +6,8 @@
 # You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 
 import  sys
-from    bottle      import Bottle, run
+from    bottle                  import Bottle, run
+from    beaker.middleware       import SessionMiddleware
 
 import  handler
 
@@ -17,6 +18,8 @@ app = Bottle()
 
 app.merge(handler.app)
 app.merge(staticdir.app)
+
+app = SessionMiddleware(app, server.session_opts)
 
 run(app,
     host = server.host,

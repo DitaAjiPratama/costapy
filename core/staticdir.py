@@ -1,9 +1,7 @@
-from    bottle      import Bottle, get, static_file
+from    bottle      import Bottle, static_file
 from    config      import directory
 
 app = Bottle()
 
-for items in directory.static:
-    @app.get(items['route'])
-    def static_items(filepath):
-        return static_file(filepath, root=items['root'])
+for item in directory.static:
+    app.route(item['route'], "GET", lambda filepath, root=item['root']: static_file(filepath, root=root) )
