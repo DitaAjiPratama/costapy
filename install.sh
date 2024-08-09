@@ -1,6 +1,12 @@
-sudo apt-get install -y python3-pip
-pip install --upgrade pip
-pip install bottle # Micro Framework
-pip install gunicorn # WSGI Server Backend
-pip install beaker # Session & caching library
-pip install mako # Template library
+python3 -m venv .venv # Create .venv
+
+.venv/bin/pip3 install --upgrade pip # Upgrade pip
+
+.venv/bin/pip3 install bottle # Micro Framework
+.venv/bin/pip3 install gunicorn # WSGI Server Backend
+.venv/bin/pip3 install beaker # Session & caching library
+.venv/bin/pip3 install mako # Template library
+
+.venv/bin/pip3 install mysql-connector # Database connector
+.venv/bin/pip3 install bcrypt # Password hash
+.venv/bin/pip3 install pyjwt[crypto] # JWT
