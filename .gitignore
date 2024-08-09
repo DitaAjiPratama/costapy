@@ -1,7 +1,6 @@
 **/__pycache__
 *.pyc
-venv/
-env/
+.venv/
 .beaker/data/*
 !.beaker/data/.noremove
 nohup.out
