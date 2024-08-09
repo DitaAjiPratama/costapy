@@ -1,0 +1,9 @@
+<nav class="navbar">
+  % for item in menu:
+  % if any(role in item['roles'] for role in user_roles):
+  <a class="${'active' if item['name'] == active_page else ''}" href="${item['href']}" target="${item['target']}">
+	${item['name']}
+  </a>
+  % endif
+  % endfor
+</nav>
