@@ -16,6 +16,10 @@ from    config      import server
 
 app = Bottle()
 
+@app.hook('after_request')
+def after_request():
+    server.enable_cors()
+
 app.merge(handler.app)
 app.merge(staticdir.app)
 
