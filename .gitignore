@@ -1,6 +1,12 @@
+.venv
+
 **/__pycache__
 *.pyc
-.venv/
+
+.DS_Store
+
+nohup.out
+
 .beaker/data/*
 !.beaker/data/.noremove
-nohup.out
+
