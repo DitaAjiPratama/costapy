@@ -9,7 +9,7 @@ class webmail():
     def verification(self, APIADDR, params, data):
         return {
             "subject"	: f"{globalvar.title} email verification",
-            "text"	: f"Please visit this link to complete the registration: {data['verify']}. You are not registering this? report on this: {data['notme'].",
+            "text"	: f"Please visit this link to complete the registration: {data['verify']} . You are not registering this? report on this: {data['notme']} .",
             "html"	: Template(params["mako"]["email"]['index']).render(
                 title       = globalvar.title,
                 header      = globalvar.title,
