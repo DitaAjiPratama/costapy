@@ -1,3 +1,5 @@
+import datetime
+
 title                   = "Authsquare"
 header                  = f"Welcome to {title}"
 copyright               = "Copyright (C) 2024  Dita Aji Pratama"
@@ -31,6 +33,10 @@ smtpconfig = {
     },
     "from"      : "user@domain.com"
 }
+
+verification_link_expiration	= datetime.datetime.now() + datetime.timedelta(minutes=30)
+forgot_link_expiration		= datetime.datetime.now() + datetime.timedelta(minutes=30)
+# Can be hours or minutes
 
 baseurl     = "https://domain.com"
 if production == False:
