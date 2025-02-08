@@ -21,3 +21,31 @@ class webmail():
                 )
             )
         }
+
+    def notme(self, APIADDR, params, data):
+        return {
+            "subject"	: f"{globalvar.title} - Thanks for the reporting",
+            "text"	: "Thanks for your report. Now your data will be deleted from our system.",
+            "html"	: Template(params["mako"]["email"]['index']).render(
+                title       = globalvar.title,
+                header      = globalvar.title,
+                copyright   = globalvar.copyright,
+                container = Template(params["mako"]["email"]['container']).render(
+                        message = "Thanks for your report. Now your data will be deleted from our system."
+                )
+            )
+        }
+
+    def welcome(self, APIADDR, params, data):
+        return {
+            "subject"	: f"Welcome to {globalvar.title}",
+            "text"	: f"Welcome {data['username']}, Now your account is verified.",
+            "html"	: Template(params["mako"]["email"]['index']).render(
+                title       = globalvar.title,
+                header      = globalvar.title,
+                copyright   = globalvar.copyright,
+                container   = Template(params["mako"]["email"]['container']).render(
+                    message = f"Welcome {data['username']}, Now your account is verified."
+        	)
+            )
+        }
