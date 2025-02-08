@@ -20,7 +20,7 @@ class auth:
         self.smtpconfig	= globalvar.smtpconfig
 
     def register(self, params):
-        APIADDR		= "/api/auth/registration/register/:roles"
+        APIADDR		= "/api/auth/register/:roles"
         loggorilla.prcss(APIADDR, "Define parameters")
         response	= {}
         captcha		= params["captcha"	]
@@ -92,7 +92,7 @@ class auth:
         return response
 
     def resend(self, params):
-        APIADDR     = "/api/auth/registration/resend"
+        APIADDR     = "/api/auth/resend"
         loggorilla.prcss(APIADDR, "Define parameters")
         response    = {}
         email       = params["email"].lower()
