@@ -49,3 +49,31 @@ class webmail():
         	)
             )
         }
+
+    def reset(self, APIADDR, params, data):
+        return {
+            "subject"	: f"{globalvar.title} - Reset password",
+            "text"	: f"Please visit this link to reset password: {data['reset']}. Avoid the link if you are not request this.",
+            "html"	: Template(params["mako"]["email"]['index']).render(
+                title       = globalvar.title,
+                header      = globalvar.title,
+                copyright   = globalvar.copyright,
+                container   = Template(params["mako"]["email"]['container']).render(
+                    reset   = data['reset']
+                )
+            )
+        }
+
+    def changed(self, APIADDR, params, data):
+        return {
+            "subject"	: f"{globalvar.title} - password change success",
+            "text"	: "You had change your password.",
+            "html"	: Template(params["mako"]["email"]['index']).render(
+                title       = globalvar.title,
+                header      = globalvar.title,
+                copyright   = globalvar.copyright,
+                container   = Template(params["mako"]["email"]['container']).render(
+                    message = "You had change your password."
+                )
+            )
+        }
