@@ -146,7 +146,7 @@ class auth:
             payload = tokenguard.decode(token_encrypt, globalvar.ssh['key']['public'])
             token   = payload['token']
             loggorilla.prcss(APIADDR, "Get dependency data")
-            self.cursor.execute(f"SELECT COUNT(*) AS `count`, auth_profile_verification.verified FROM auth_profile_verification INNER JOIN auth_profile ON auth_profile.id = auth_profile_verification.auth_profile WHERE auth_profile.token = %s AND auth_profile_verification.type = 'email' ; ", (token,) )
+            self.cursor.execute(f"SELECT COUNT(*) AS `count`, auth_profile_verification.verified FROM auth_profile_verification INNER JOIN auth_profile ON auth_profile.id = auth_profile_verification.profile WHERE auth_profile.token = %s AND auth_profile_verification.type = 'email' ; ", (token,) )
             result_verification = self.cursor.fetchone()
             self.cursor.execute("SELECT COUNT(*) AS `count`, token, id, email FROM auth_profile WHERE token = %s ; ", (token,) )
             result_profile = self.cursor.fetchone()
@@ -191,7 +191,7 @@ class auth:
             token   = payload['token']
             expired = datetime.datetime.fromisoformat(payload['expired'])
             loggorilla.prcss(APIADDR, "Get dependency data")
-            self.cursor.execute(f"SELECT COUNT(*) AS `count`, auth_profile_verification.verified FROM auth_profile_verification INNER JOIN auth_profile ON auth_profile.id = auth_profile_verification.auth_profile WHERE auth_profile.token = %s AND auth_profile_verification.type = 'email' ; ", (token,) )
+            self.cursor.execute(f"SELECT COUNT(*) AS `count`, auth_profile_verification.verified FROM auth_profile_verification INNER JOIN auth_profile ON auth_profile.id = auth_profile_verification.profile WHERE auth_profile.token = %s AND auth_profile_verification.type = 'email' ; ", (token,) )
             result_verification = self.cursor.fetchone()
             self.cursor.execute("SELECT COUNT(*) AS `count`, token, username, id, email FROM auth_profile WHERE token = %s ; ", (token,) )
             result_profile = self.cursor.fetchone()
@@ -208,7 +208,7 @@ class auth:
                 response["desc"		] = "Expired. Your data removed."
             else:
                 loggorilla.prcss(APIADDR, "Updating")
-                self.cursor.execute("UPDATE `auth_profile_verification` SET `verified` = 1 WHERE `type` = 'email' AND `auth_profile` = %s ; ", (result_profile['id'],) )
+                self.cursor.execute("UPDATE `auth_profile_verification` SET `verified` = 1 WHERE `type` = 'email' AND `profile` = %s ; ", (result_profile['id'],) )
                 loggorilla.prcss(APIADDR, "Sending email")
                 webmail_data 	= {
                     "username"	: result_profile['username'	],
