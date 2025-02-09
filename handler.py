@@ -28,7 +28,7 @@ def index():
     }
     return public_home.main().html(params)
 
-@app.route('/api/auth/registration/register/<roles>', method=['OPTIONS', 'POST'])
+@app.route('/api/auth/register/<roles>', method=['OPTIONS', 'POST'])
 def index(roles):
     try:
         if request.method == 'OPTIONS':
@@ -45,7 +45,7 @@ def index(roles):
         print(str(e),flush=True)
         return json.dumps({}, indent = 2).encode()
 
-@app.route('/api/auth/registration/resend', method='GET')
+@app.route('/api/auth/resend', method='GET')
 def index():
     try:
         if request.method == 'OPTIONS':
@@ -62,3 +62,40 @@ def index():
     except Exception as e:
         print(str(e),flush=True)
         return json.dumps({}, indent = 2).encode()
+
+@app.route('/api/auth/notme', method='GET')
+def index():
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = {
+                "token" : request.query.token,
+                "mako" : {
+                    "email" : template_email.main(directory.page["email"], "message")
+                }
+            }
+            return json.dumps(api_auth.auth().notme(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+    
+@app.route('/api/auth/verify', method='GET')
+def index():
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = {
+                "token" : request.query.token,
+                "mako" : {
+                    "email" : template_email.main(directory.page["email"], "message")
+                }
+            }
+            return json.dumps(api_auth.auth().verify(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+
