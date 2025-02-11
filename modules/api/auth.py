@@ -245,7 +245,7 @@ class auth:
             loggorilla.prcss(APIADDR, "Get dependency data")
             self.cursor.execute("SELECT COUNT(*) AS `count`, auth.token, auth_profile.id, auth_profile.username, auth.password FROM auth_profile INNER JOIN auth ON auth.token = auth_profile.token WHERE auth_profile.username = %s ; ", (username,) )
             result_login = self.cursor.fetchone()
-            self.cursor.execute("SELECT `profile`, `type`, `verified` FROM auth_profile_verification WHERE `type` = 'email' AND `auth_profile` = %s ; ", (result_login['id'],) )
+            self.cursor.execute("SELECT `profile`, `type`, `verified` FROM auth_profile_verification WHERE `type` = 'email' AND `profile` = %s ; ", (result_login['id'],) )
             result_verification = self.cursor.fetchone()
             loggorilla.prcss(APIADDR, "Validation")
             if result_login['count'] == 1 and result_verification['verified'] == 1 and bcrypt.checkpw(password.encode(), result_login['password'].decode().encode() ) :
