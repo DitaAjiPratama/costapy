@@ -1,0 +1,30 @@
+meta {
+  name: Session
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:11000/api/auth/session/:type
+  body: none
+  auth: none
+}
+
+params:path {
+  type: check
+}
+
+headers {
+  Authorization: Bearer xx.xx.xx
+}
+
+docs {
+  This API only used when you use CostaPy as your main client.
+  
+  Session have a 3 type:
+  - `set` for set the Bearer inside the Authorization. Need to declare a `jwt` on JSON Body.
+  - `check` for check the Bearer is still valid or not.
+  - `out` for remove the Bearer inside of Authorization.
+  
+  The `set`, `out`, and some part of `check` is still not tested yet. Need the interface to test it.
+}

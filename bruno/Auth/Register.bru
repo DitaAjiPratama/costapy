@@ -5,9 +5,13 @@ meta {
 }
 
 post {
-  url: http://localhost:11000/api/auth/register/su
+  url: http://localhost:11000/api/auth/register/:roles
   body: json
   auth: none
+}
+
+params:path {
+  roles: su
 }
 
 body:json {
