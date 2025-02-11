@@ -1,6 +1,6 @@
 import  mysql.connector     as      mariadb
 from    mako.template       import  Template
-from    bottle              import  request
+from    bottle              import  request, response as bottle_response
 
 from    config              	import  database, globalvar
 
@@ -293,25 +293,32 @@ class auth:
             type        = params["type" ] # set / check / out
             if type == "set":
                 loggorilla.fyinf(APIADDR, "type is 'set': get the jwt from parameters")
+                loggorilla.prcss(APIADDR, "Get the token from params")
                 jwt         = params["jwt"  ]
             else:
                 loggorilla.fyinf(APIADDR, "type is not 'set': get the jwt from Header")
                 loggorilla.prcss(APIADDR, "Extract the token from Header")
-                auth_header = request.headers.get('Authorization')
-                jwt 	    = auth_header.split(' ')[1]
+                auth_header = request.get_header('Authorization')
+                loggorilla.prcss(APIADDR, "Check the bearer")
+                if auth_header.split(' ')[0] == 'Bearer':
+                    loggorilla.fyinf(APIADDR, "Use bearer")
+                    jwt 	    = auth_header.split(' ')[1]
+                else:
+                    loggorilla.fyinf(APIADDR, "Not use bearer")
+                    jwt = None
             payload     	= tokenguard.decode(jwt, globalvar.ssh['key']['public'])
             session_id  	= payload["session"]["id"]
             if type == 'set':
                 loggorilla.prcss(APIADDR, "Set authorization on header")
-                response.set_header("Authorization", f"Bearer {jwt}")
+                bottle_response.set_header("Authorization", f"Bearer {jwt}")
                 response["status"   ] = "success"
                 response["desc"     ] = "Session set"
             elif type == 'check':
                 loggorilla.prcss(APIADDR, "Check session")
                 self.cursor.execute(f"SELECT COUNT(*) AS `count` FROM auth_session WHERE id = %s ; ", (session_id,) )
                 result_session = self.cursor.fetchone()
-                if result_session == 0:
-                    response.set_header("Authorization", "")
+                if result_session['count'] == 0:
+                    bottle_response.set_header("Authorization", "")
                     response["status"   ] = "success"
                     response["desc"     ] = "session out"
                     response["data"     ] = {
@@ -325,7 +332,7 @@ class auth:
                     }
             elif type == 'out':
                 loggorilla.prcss(APIADDR, "Remove Authorization header")
-                response.set_header("Authorization", "")
+                bottle_response.set_header("Authorization", "")
                 response["status"   ] = "success"
                 response["desc"     ] = "Session out"
             else:
