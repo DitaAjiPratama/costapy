@@ -99,3 +99,42 @@ def index():
         print(str(e),flush=True)
         return json.dumps({}, indent = 2).encode()
 
+@app.route('/api/auth/login', method=['OPTIONS', 'POST'])
+def index():
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = request.json
+            return json.dumps(api_auth.auth().login(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+
+@app.route('/api/auth/session/<type>', method=['OPTIONS', 'POST'])
+def index(type):
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = {}
+            params["type"   ] = type
+            return json.dumps(api_auth.auth().session(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+
+@app.route('/api/auth/logout', method=['OPTIONS', 'POST'])
+def index():
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            params = {}
+            return json.dumps(api_auth.auth().logout(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+
