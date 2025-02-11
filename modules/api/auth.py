@@ -447,7 +447,15 @@ class auth:
         APIADDR     = "/api/auth/logout"
         loggorilla.prcss(APIADDR, "Define parameters")
         response    = {}
-        jwt         = params["jwt"  ]
+        loggorilla.prcss(APIADDR, "Extract the token from Header")
+        auth_header = request.get_header('Authorization')
+        loggorilla.prcss(APIADDR, "Check the bearer")
+        if auth_header.split(' ')[0] == 'Bearer':
+            loggorilla.fyinf(APIADDR, "Use bearer")
+            jwt 	    = auth_header.split(' ')[1]
+        else:
+            loggorilla.fyinf(APIADDR, "Not use bearer")
+            jwt = None
         payload     = tokenguard.decode(jwt, globalvar.ssh['key']['public'])
         session_id  = payload["session"]["id"]
         self.cursor.execute("BEGIN;")
