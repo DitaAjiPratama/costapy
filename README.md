@@ -1,5 +1,5 @@
 # CostaPy
-Python Web Framework. Build with Bottle and Mako.
+a Python WSGI Web Framework. Build with Bottle and Mako.
 
 ## License
 
@@ -20,69 +20,65 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see https://www.gnu.org/licenses/.
 
-## Requirement & Installation
+# Getting Starter
 
-### Clone the repository
+## Requirement
 
-Clone the repository with `--recursive` when cloning the repo.
+You need a `git`, `python`, `pip`, and `venv` before using CostaPy.
 
-    git clone https://gitea.ditaajipratama.net/aji/costapy.git --recursive
+Install them using the following commands on your `Debian` or `Ubuntu` system.
 
-Note that if you forgot the `--recursive` flag you can do:
+```bash
+sudo apt update
+sudo apt install git python3 python3-venv python3-pip
+```
 
-    git submodule update --init
+or you can use the following command to install similar packages using `brew`, the package manager for `macOS`:
 
-Note that when submodules have other submodules you need recursive option.
+```bash
+brew install git python3
+```
+Installs Python 3 with `brew`, which includes `python3`, `pip3`, and the `venv` module. If you don't have Homebrew installed on your `macOS`, you can install it first.
 
-    git submodule update --init --recursive
+or go to the [git downloads page](https://git-scm.com/downloads) and a [Python downloads page](https://www.python.org/downloads/) and download the latest version of git Python for `Windows`.
 
-### Dependencies
+## Installation
 
-You need this libraries to use CostaPy:
-- bottle
-- gunicorn
-- beaker
-- mako
+Download from repository
+```bash
+git clone https://gitea.ditaajipratama.net/aji/costapy.git
+```
 
-You can install it with run this command
+Go to the directory and install with this command:
 
-    sh install.sh
+```bash
+cd costapy
+bash install.sh
+```
 
-Here is the completed command
-
-    sudo apt-get install -y python3-pip
-    pip install --upgrade pip
-    pip install bottle
-    pip install gunicorn
-    pip install beaker
-    pip install mako
+Use `cat install.sh` if you want to see a completed command.
 
 ## Usage
 
-Use this command to start the web service
+Use this command below to start the web service and it will run on port `11000` by default
+```bash
+.venv/bin/python3 costa.py costapy-welcome
+```
+Here, `costapy-welcome` is the label of your service. You can replace it with any name you prefer.
 
-    python3 costa.py
+## Trivia
 
-You can use nohup too and running it in the background like this
+- Why must `venv`?
 
-    nohup python3 costa.py &
+  `venv` is a module in Python that provides support for creating lightweight, isolated Python environments, known as virtual environments. Each virtual environment has its own installation directories and can have its own versions of Python packages, independent of the system-wide Python environment.
 
-## Configuration
+  When deploying a Python application, using a virtual environment ensures that only the required packages (and their specific versions) are bundled. This reduces the risk of deploying unnecessary packages or incompatible versions that could lead to runtime errors.
 
-### Global Variable (config/globalvar.py)
+  Using `venv` is a widely accepted best practice in the Python community. It encourages good habits in dependency management, ensuring that projects are self-contained and reducing the potential for "dependency hell."
 
-`globalvar.py` is the place for storing your Global Variable.
+  When a project is no longer needed, deleting its virtual environment is straightforward and does not affect other projects or the system's Python environment.
 
-`baseurl` </br>
-Is the variable for your base URL (without `/` in the end).
+- Why I add `venv` on my `gitignore`?
 
-`title` </br>
-Is the variable for your web title.
+  Committing `venv` to Git is gross. Virtual environments can contain thousands of files and their size can be in gigabytes. Committing them to Git can overload and clutter your source code repo with unnecessary files and cause confusion for anyone trying to clone and run the source code on their machine.
 
-### Directory (config/directory.py)
-
-`directory.py` is the place for storing your path. It is useful to calling the path more efficiently.
-
-## Handling the modules
-
-Handling the module is in `handler.py`.
