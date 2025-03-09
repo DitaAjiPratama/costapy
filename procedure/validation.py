@@ -120,9 +120,9 @@ class validation():
                 session_not_found   = False
                 cursor.execute(f"SELECT COUNT(*) AS `count`, auth_profile.* FROM auth_profile_verification LEFT JOIN auth_profile ON auth_profile.id = auth_profile_verification.profile WHERE auth_profile.token = %s AND auth_profile_verification.type = 'email' AND auth_profile_verification.verified = 1 ; ", (r_session['token'],) )
                 r_profile           = cursor.fetchone()
-                cursor.execute(f"SELECT auth_roles FROM auth_profile_roles WHERE auth_profile = %s ; ", (r_profile['id'],) )
+                cursor.execute(f"SELECT roles FROM auth_profile_roles WHERE profile = %s ; ", (r_profile['id'],) )
                 r_roles             = cursor.fetchall()
-                r_profile['roles']  = [item['auth_roles'] for item in r_roles]
+                r_profile['roles']  = [item['roles'] for item in r_roles]
 
             loggorilla.prcss(APIADDR, "Close DB")
             cursor.close()
