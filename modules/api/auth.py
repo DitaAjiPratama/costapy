@@ -169,6 +169,7 @@ class auth:
                 response["status"	] = "success"
                 response["desc"		] = "Thanks for your report. Now your data will be deleted from our system."
         except Exception as e:
+            loggorilla.prcss(APIADDR, "Rollback")
             self.cursor.execute("ROLLBACK;")
             loggorilla.error(APIADDR, str(e) )
             response["status"		] = "failed"
@@ -427,7 +428,7 @@ class auth:
                 }
             else:
                 loggorilla.prcss(APIADDR, "Updating")
-                self.cursor.execute("UPDATE `auth` SET `password` = %s, `when_update` = NOW() WHERE `token` = %s", (hashed, token) )
+                self.cursor.execute("UPDATE `auth` SET `password` = %s WHERE `token` = %s", (hashed, token) )
                 loggorilla.prcss(APIADDR, "Sending email")
                 webmail_data 	= {}
                 result_webmail	= procedure_webmail.webmail().changed(APIADDR, params, webmail_data)

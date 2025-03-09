@@ -18,6 +18,8 @@ import	modules.public.register	as public_register
 import	modules.public.notme	as public_notme
 import	modules.public.verify	as public_verify
 import	modules.public.login	as public_login
+import	modules.public.forgot	as public_forgot
+import	modules.public.reset	as public_reset
 
 import  modules.api.auth        as api_auth
 
@@ -68,6 +70,24 @@ def index():
         }
     }
     return public_login.login().html(params)
+
+@app.route('/forgot')
+def index():
+    params = {
+        "mako"  : {
+            "website" : template_public.main(directory.page["public"], "forgot")
+        }
+    }
+    return public_forgot.forgot().html(params)
+
+@app.route('/reset', method='GET')
+def index():
+    params = {
+        "mako"  : {
+            "website" : template_public.main(directory.page["public"], "reset")
+        }
+    }
+    return public_reset.reset().html(params)
 
 @app.route('/api/auth/register/<roles>', method=['OPTIONS', 'POST'])
 def index(roles):
@@ -136,6 +156,38 @@ def index():
         print(str(e),flush=True)
         return json.dumps({}, indent = 2).encode()
 
+@app.route('/api/auth/forgot', method=['OPTIONS', 'POST'])
+def index():
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = request.json
+            params["mako"   ] = {
+                "email" : template_email.main(directory.page["email"], "reset")
+            }
+            return json.dumps(api_auth.auth().forgot(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+
+@app.route('/api/auth/reset', method=['OPTIONS', 'POST'])
+def index():
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = request.json
+            params["mako"   ] = {
+                "email" : template_email.main(directory.page["email"], "message")
+            }
+            return json.dumps(api_auth.auth().reset(params), indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
+    
 @app.route('/api/auth/login', method=['OPTIONS', 'POST'])
 def index():
     try:
