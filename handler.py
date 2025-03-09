@@ -14,6 +14,10 @@ import  templates.plain.main	as template_public
 import  templates.postcard.main	as template_email
 
 import  modules.public.home     as public_home
+import	modules.public.register	as public_register
+import	modules.public.notme	as public_notme
+import	modules.public.verify	as public_verify
+import	modules.public.login	as public_login
 
 import  modules.api.auth        as api_auth
 
@@ -27,6 +31,43 @@ def index():
         }
     }
     return public_home.main().html(params)
+
+@app.route('/register/<roles>')
+def index(roles):
+    params = {
+        "roles" :roles,
+        "mako"  :{
+            "website" : template_public.main(directory.page["public"], "register")
+        }
+    }
+    return public_register.register().html(params)
+
+@app.route('/notme', method='GET')
+def index():
+    params = {
+        "mako"  : {
+            "website" : template_public.main(directory.page["public"], "notme")
+        }
+    }
+    return public_notme.notme().html(params)
+
+@app.route('/verify', method='GET')
+def index():
+    params = {
+        "mako"  : {
+            "website" : template_public.main(directory.page["public"], "verify")
+        }
+    }
+    return public_verify.verify().html(params)
+
+@app.route('/login')
+def index():
+    params = {
+        "mako"  : {
+            "website" : template_public.main(directory.page["public"], "login")
+        }
+    }
+    return public_login.login().html(params)
 
 @app.route('/api/auth/register/<roles>', method=['OPTIONS', 'POST'])
 def index(roles):

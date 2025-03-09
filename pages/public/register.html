@@ -1,0 +1,32 @@
+<h1>Register</h1>
+
+% if production:
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+% endif
+<script type="text/javascript" src="/js/carrack.js"></script>
+
+<!-- FORM -->
+<input type="hidden" id="roles" value="${roles}">
+<input required type="email"    id="form-email"     placeholder="Email" > <br>
+<input required type="text"     id="form-username"  placeholder="Username" > <br>
+<input required type="password" id="form-password"  placeholder="Password" > <br>
+
+% if production:
+<button class="g-recaptcha" data-sitekey="${reCAPTCHA_client}" data-callback='onSubmit' data-action='submit'>Register</button>
+% else:
+<button onclick="onSubmit('dev')">Register</button>
+% endif
+
+<!-- RESPONSE -->
+<div id="alert-response" role="alert">
+  <b id="alert-status">Loading...</b> <span id="alert-desc">Please wait...</span>
+</div>
+
+<!-- RESEND FORM -->
+<div id="resend-div">
+  <input type="hidden" id="resend-email" value="">
+  <button id="resend-link" onclick="resending()">Resend verification</button>
+  <p id="resend-message">Message here</p>
+</div>
+
+<script type="text/javascript" src="/js/auth/register.js"></script>
