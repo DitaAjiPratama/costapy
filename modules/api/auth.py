@@ -430,7 +430,7 @@ class auth:
         return response
 
     def logout(self, params):
-        APIADDR     = "/logout"
+        APIADDR     = "/api/auth/logout"
         loggorilla.prcss(APIADDR, "Define parameters")
         response    = {}
         jwt         = params["jwt"  ]
