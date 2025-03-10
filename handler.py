@@ -89,6 +89,26 @@ def index():
     }
     return public_reset.reset().html(params)
 
+@app.route('/logout')
+def index():
+    beaker_session = request.environ.get('beaker.session')
+    if "token" in beaker_session:
+        params = {
+            "jwt" : beaker_session["token"],
+            "type" : "out"
+        }
+        response_session    = api_auth.auth().session(params)
+        response_logout     = api_auth.auth().logout(params)
+        if response_session['status'] == 'success' and response_logout['status'] == 'success' :
+            redirect('/?message=logout success')
+        else:
+            print('logout failed')
+            print(f"response session: {response_session['status']}")
+            print(f"response logout: {response_logout['status']}")
+            redirect('/?message=logout failed')
+    else:
+        redirect('/')
+
 @app.route('/api/auth/register/<roles>', method=['OPTIONS', 'POST'])
 def index(roles):
     try:
@@ -208,7 +228,7 @@ def index(type):
             return None
         else:
             response.content_type = 'application/json'
-            params = {}
+            params = request.json
             params["type"   ] = type
             return json.dumps(api_auth.auth().session(params), indent = 2).encode()
     except Exception as e:
@@ -221,7 +241,7 @@ def index():
         if request.method == 'OPTIONS':
             return None
         else:
-            params = {}
+            params = request.json
             return json.dumps(api_auth.auth().logout(params), indent = 2).encode()
     except Exception as e:
         print(str(e),flush=True)
