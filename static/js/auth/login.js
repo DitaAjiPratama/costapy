@@ -32,16 +32,14 @@ function responseSession(response) {
 
 function setSession(jwt) {
   var url     = "/api/auth/session/set";
-  var payload = {
-    "jwt" : jwt
-  };
+  var payload = {};
   sendHttpRequest(url, "POST", payload, function (error, response) {
     if (error) console.error("Error:", error);
     else {
       console.log("JSON Response:", response);
       responseSession(response);
     }
-  }, "application/json");
+  }, "application/json", `Bearer ${jwt}`);
 }
 
 function responseAlert(response) {
