@@ -62,15 +62,6 @@ def index():
     }
     return public_verify.verify().html(params)
 
-@app.route('/login')
-def index():
-    params = {
-        "mako"  : {
-            "website" : template_public.main(directory.page["public"], "login")
-        }
-    }
-    return public_login.login().html(params)
-
 @app.route('/forgot')
 def index():
     params = {
@@ -88,6 +79,15 @@ def index():
         }
     }
     return public_reset.reset().html(params)
+
+@app.route('/login')
+def index():
+    params = {
+        "mako"  : {
+            "website" : template_public.main(directory.page["public"], "login")
+        }
+    }
+    return public_login.login().html(params)
 
 @app.route('/logout')
 def index():
