@@ -291,25 +291,17 @@ class auth:
         loggorilla.prcss(APIADDR, "Define parameters")
         response    = {}
         try:
-            type        = params["type" ] # set / check / out
-            if type == "set":
-                loggorilla.fyinf(APIADDR, "type is 'set': get the jwt from parameters")
-                loggorilla.prcss(APIADDR, "Get the token from params")
-                jwt         = params["jwt"  ]
+            type        = params["type" ] # set / out
+            loggorilla.prcss(APIADDR, "Extract the token from Header")
+            auth_header = request.get_header('Authorization')
+            if auth_header and auth_header.split(' ')[0] == 'Bearer':
+                loggorilla.fyinf(APIADDR, "Use Bearer")
+                jwt 	    = auth_header.split(' ')[1]
+                payload     	= tokenguard.decode(jwt, globalvar.ssh['key']['public'])
+                session_id  	= payload["session"]["id"]
             else:
-                jwt         = params["jwt"  ]
-                #loggorilla.fyinf(APIADDR, "type is not 'set': get the jwt from Header")
-                #loggorilla.prcss(APIADDR, "Extract the token from Header")
-                #auth_header = request.get_header('Authorization')
-                #loggorilla.prcss(APIADDR, "Check the bearer")
-                #if auth_header.split(' ')[0] == 'Bearer':
-                #    loggorilla.fyinf(APIADDR, "Use bearer")
-                #    jwt 	    = auth_header.split(' ')[1]
-                #else:
-                #    loggorilla.fyinf(APIADDR, "Not use bearer")
-                #    jwt = None
-            payload     	= tokenguard.decode(jwt, globalvar.ssh['key']['public'])
-            session_id  	= payload["session"]["id"]
+                loggorilla.fyinf(APIADDR, "Not use Bearer")
+                jwt = None
             session_beaker	= request.environ.get('beaker.session')
             if type == 'set':
                 loggorilla.prcss(APIADDR, "Set session")
@@ -317,23 +309,6 @@ class auth:
                 session_beaker.save()
                 response["status"   ] = "success"
                 response["desc"     ] = "Session set"
-            elif type == 'check':
-                loggorilla.prcss(APIADDR, "Check session")
-                self.cursor.execute(f"SELECT COUNT(*) AS `count` FROM auth_session WHERE id = %s ; ", (session_id,) )
-                result_session = self.cursor.fetchone()
-                if result_session['count'] == 0:
-                    bottle_response.set_header("Authorization", "")
-                    response["status"   ] = "success"
-                    response["desc"     ] = "session out"
-                    response["data"     ] = {
-                        "status":"lost"
-                    }
-                else:
-                    response["status"   ] = "success"
-                    response["desc"     ] = "session active"
-                    response["data"     ] = {
-                        "status":"active"
-                    }
             elif type == 'out':
                 loggorilla.prcss(APIADDR, "Out session")
                 session_beaker.delete()
