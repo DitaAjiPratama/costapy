@@ -10,5 +10,7 @@ nohup.out
 .beaker/data/*
 !.beaker/data/.noremove
 
+.gadogado
+
 .ssh
 
