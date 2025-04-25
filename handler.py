@@ -22,6 +22,7 @@ import	modules.public.forgot	as public_forgot
 import	modules.public.reset	as public_reset
 
 import  modules.api.auth        as api_auth
+import  modules.api.roles	as api_auth_roles
 
 app = Bottle()
 
@@ -247,3 +248,24 @@ def index():
         print(str(e),flush=True)
         return json.dumps({}, indent = 2).encode()
 
+@app.route('/api/auth/roles/<alder>', method=['OPTIONS', 'POST'])
+def index(alder):
+    try:
+        if request.method == 'OPTIONS':
+            return None
+        else:
+            response.content_type = 'application/json'
+            params = request.json
+            if alder == 'add':
+                return json.dumps(api_auth_roles.roles().add(params), indent = 2).encode()
+            elif alder == 'list':
+                return json.dumps(api_auth_roles.roles().list(params), indent = 2).encode()
+            elif alder == 'edit':
+                return json.dumps(api_auth_roles.roles().edit(params), indent = 2).encode()
+            elif alder == 'remove':
+                return json.dumps(api_auth_roles.roles().remove(params), indent = 2).encode()
+            else:
+                return json.dumps({}, indent = 2).encode()
+    except Exception as e:
+        print(str(e),flush=True)
+        return json.dumps({}, indent = 2).encode()
