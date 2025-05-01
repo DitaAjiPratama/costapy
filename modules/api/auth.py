@@ -433,7 +433,9 @@ class auth:
         APIADDR     = "/api/auth/logout"
         loggorilla.prcss(APIADDR, "Define parameters")
         response    = {}
-        jwt         = params["jwt"  ]
+        loggorilla.prcss(APIADDR, "Extract the Authorization token from Header")
+        auth_header = request.get_header('Authorization')
+        jwt         = auth_header.split(' ')[1]
         payload     = tokenguard.decode(jwt, globalvar.ssh['key']['public'])
         session_id  = payload["session"]["id"]
         self.cursor.execute("BEGIN;")
