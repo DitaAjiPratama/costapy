@@ -22,18 +22,6 @@ reCAPTCHA = {
     "server" : "your_key"
 }
 
-smtpconfig = {
-    "login"     : {
-        "email"     : "user@domain.com",
-        "password"  : "your_password"
-    },
-    "server"    : {
-        "host"      : "smtp.domain.com",
-        "port"      : 587
-    },
-    "from"      : "user@domain.com"
-}
-
 verification_link_expiration	= datetime.datetime.now() + datetime.timedelta(minutes=30)
 forgot_link_expiration		= datetime.datetime.now() + datetime.timedelta(minutes=30)
 # Can be hours or minutes

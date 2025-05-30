@@ -2,7 +2,7 @@ import  mysql.connector     as      mariadb
 from    mako.template       import  Template
 from    bottle              import  request, response as bottle_response
 
-from    config              	import  database, globalvar
+from    config              	import  database, email, globalvar
 
 import  bcrypt
 import  datetime
@@ -17,7 +17,7 @@ class auth:
     def __init__(self):
         self.db_main	= mariadb.connect(**database.db_main)
         self.cursor	= self.db_main.cursor(dictionary=True)
-        self.smtpconfig	= globalvar.smtpconfig
+        self.smtpconfig	= email.smtpconfig
 
     def register(self, params):
         APIADDR		= "/api/auth/register/:roles"
