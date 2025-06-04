@@ -1,5 +1,5 @@
 from    mako.template           import  Template
-from    config                  import  globalvar
+from    config                  import  globalvar, navigation
 from    scripts                 import  loggorilla
 
 import  procedure.validation    as 		procedure_validation
@@ -24,7 +24,7 @@ class forgot:
             title	= globalvar.title,
             header	= globalvar.header,
             navbar	= Template(params["mako"]["website"]['navbar']).render(
-                menu		= globalvar.menu['public']['navbar'],
+                menu		= navigation.menu['public']['navbar'],
                 user_roles	= user['profile']['roles'],
                 active_page	= active_page
             ),
