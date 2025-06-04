@@ -2,16 +2,16 @@ from bottle import response
 
 host        = "localhost"
 port        = 11000
-reloader    = False
+reloader    = True
 debug       = False
-server      = 'gunicorn' # default = 'wsgiref'
+server      = 'wsgiref' # try 'gunicorn'
 
 session_opts = {
     'session.type': 'file',
     'session.cookie_expires': 5*60, # Session expiration in seconds: minutes*seconds
     'session.data_dir': './.beaker/data',
     'session.auto': True
-}
+} # beaker's session options
 
 def enable_cors():
     response.headers['Access-Control-Allow-Origin' ] = '*'
