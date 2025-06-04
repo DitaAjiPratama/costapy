@@ -1,5 +1,5 @@
 from    mako.template      import Template
-from    config             import globalvar
+from    config             import globalvar, navigation
 
 class main:
 
@@ -11,7 +11,7 @@ class main:
             title	= globalvar.title,
             header	= "Welcome to CostaPy",
             navbar	= Template(params["mako"]["website"]['navbar']).render(
-                menu		= globalvar.menu['public']['navbar'],
+                menu		= navigation.menu['public']['navbar'],
                 user_roles	= ["guest"],
                 active_page	= "Home"
             ),
